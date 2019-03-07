@@ -10,16 +10,44 @@ public class USACO{
       int elevation = 0;
       int[][] field;
       int[][] info;
+
       File f = new File(filename);
       Scanner s = new Scanner(f);
       String temp = s.nextLine();
-      row = Integer.parseInt(temp.substring(0,1));
-      col = Integer.parseInt(temp.substring(1,2));
-      inforow = Integer.parseInt(temp.substring(3,4));
+      String[] test = temp.split(" ");
+      row = Integer.parseInt(test[0]);
+      col = Integer.parseInt(test[1]);
+      inforow = Integer.parseInt(test[2]);
       field = new int[row][col];
       info = new int[inforow][3];
 
+      int r = 0;
+      while (s.hasNextLine()){
+        String line = s.nextLine();
+        //System.out.println(line);
+        String[] lineinfo = line.split(" ");
+        if (r < row){
+          for (int c = 0; c < col; c ++){
+            field[r][c] = Integer.parseInt(lineinfo[c]);
+            //System.out.println(field);
+          }
+          r ++;
+        }
+        else{
+          for (int c = 0; c < 3; c ++){
+            info[r][c] = Integer.parseInt(lineinfo[c]);
+            //System.out.println(info[r][c]);
+          }
+          r ++;
+        }
+      }
+      s.close();
     }
     catch (FileNotFoundException e){}
+      return -1;
+  }
+
+  public static void main(String[] args){
+    System.out.println(bronze("makelake.1.in"));
   }
 }
