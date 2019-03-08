@@ -1,14 +1,14 @@
 import java.io.*;
 import java.util.*;
 public class USACO{
+  private static int row = 0; //To initialize the field
+  private static int col = 0; //To initialize the field
+  private static String[][] field;
 
   public static int bronze(String filename){
     try{
-      int row = 0; //To initialize the field
-      int col = 0; //To initialize the field
       int inforow = 0; //To initialize the array storing the instructions
       int elevation = 0;
-      String[][] field;
       int[][] info;
 
       //Basic info from the text file
@@ -46,6 +46,14 @@ public class USACO{
         }
       }
       s.close();
+
+      for (int count = 0; count < inforow; count ++){
+        int srow = info[count][0];
+        int scol = info[count][1];
+        int sdepth = info[count][2];
+        stomp(srow, scol, sdepth, field);
+        System.out.println(field);
+      }
     }
     catch (FileNotFoundException e){}
     return -1;
@@ -96,6 +104,16 @@ public class USACO{
     }
   }
 
+  public String toString(){
+    String ans = "";
+    for (int r = 0; r < row; r ++){
+      for (int c = 0; c < col; c ++){
+        ans = ans + field[r][c] + " ";
+      }
+      ans += "\n";
+    }
+    return ans;
+  }
   public static void main(String[] args){
     System.out.println(bronze("makelake.1.in"));
   }
