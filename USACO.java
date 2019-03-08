@@ -47,6 +47,11 @@ public class USACO{
       return -1;
   }
 
+  private static void stomp(int row, int col, int depth){
+
+
+  }
+
   public static void main(String[] args){
     System.out.println(bronze("makelake.1.in"));
   }
