@@ -104,6 +104,10 @@ public class USACO{
     return ans;
   }
   public static void main(String[] args){
-    System.out.println(bronze("makelake.1.in"));
+    System.out.println(bronze("makelake.1.in")); //342144
+    System.out.println(bronze("makelake.2.in")); //102762432
+    System.out.println(bronze("makelake.3.in")); //1058992704
+    System.out.println(bronze("makelake.4.in")); //753121152
+    System.out.println(bronze("makelake.5.in")); //1028282688
   }
 }
