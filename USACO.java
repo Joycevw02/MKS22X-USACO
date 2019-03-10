@@ -18,31 +18,26 @@ public class USACO{
       String[] test = temp.split(" ");
       row = Integer.parseInt(test[0]);
       col = Integer.parseInt(test[1]);
-      inforow = Integer.parseInt(test[2]);
+      elevation = Integer.parseInt(test[2]);
+      inforow = Integer.parseInt(test[3]);
       field = new String[row][col];
       info = new int[inforow][3];
 
-      int r = 0;
-      while (s.hasNextLine()){
+      //Fill out the info for the field
+      for (int r = 0; r < row; r ++){
         String line = s.nextLine();
-        //System.out.println(line);
         String[] lineinfo = line.split(" ");
-        //If r < row (meaning that it is in the field's data), add the data into
-        //the int array
-        if (r < row){
-          for (int c = 0; c < col; c ++){
-            field[r][c] = lineinfo[c];
-            //System.out.println(field);
-          }
-          r ++;
+        for (int c = 0; c < col; c ++){
+          field[r][c] = lineinfo[c];
         }
-        //If not, it would be in the instructions
-        else{
-          for (int c = 0; c < 3; c ++){
-            info[r][c] = Integer.parseInt(lineinfo[c]);
-            //System.out.println(info[r][c]);
-          }
-          r ++;
+      }
+
+      //Fill out the instructions
+      for (int r = 0; r < inforow; r ++){
+        String line = s.nextLine();
+        String[] lineinfo = line.split(" ");
+        for (int c = 0; c < 3; c ++){
+          info[r][c] = Integer.parseInt(lineinfo[c]);
         }
       }
       s.close();
