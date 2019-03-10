@@ -42,12 +42,26 @@ public class USACO{
       }
       s.close();
 
+      //Carry out the instructions
       for (int count = 0; count < inforow; count ++){
         int srow = info[count][0] - 1;
         int scol = info[count][1] - 1;
         int sdepth = info[count][2];
         stomp(srow, scol, sdepth, field);
       }
+
+      //Return the volume of the lake
+      int ans = 0;
+      for (int r = 0; r < row; r ++){
+        for (int c = 0; c < col; c ++){
+          field[r][c] = elevation - field[r][c];
+          if (field[r][c] > 0){
+            ans += field[r][c];
+          }
+        }
+      }
+      ans = ans * 72 * 72;
+      return ans;
     }
     catch (FileNotFoundException e){}
     return -1;
