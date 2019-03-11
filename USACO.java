@@ -96,8 +96,7 @@ public class USACO{
 
   public static int silver(String filename){
     try{
-      int[][] field;
-      int[][] moves = {{1,0},{-1,0},{0,-1},{0,1}};
+      char[][] field;
       int row = 0; //To initialize the field
       int col = 0; //To initialize the field
       int timer = 0; //Timer
@@ -114,21 +113,13 @@ public class USACO{
       row = Integer.parseInt(info[0]);
       col = Integer.parseInt(info[1]);
       timer = Integer.parseInt(info[2]);
-      field = new int[row][col];
+      field = new char[row][col];
 
-      //Fills out the field (If it is open pasture, the value is 0 and if it is
-      //a tree, then the value is -1)
+      //Fills out the field
       for (int r = 0; r < row; r ++){
         String line = s.nextLine();
-        String[] lineinfo = line.split(" ");
         for (int c = 0; c < col; c ++){
-          if (line.charAt(c) == '.'){
-            field[r][c] = 0;
-          }
-          else{
-            field[r][c] = -1;
-          }
-        }
+          field[r][c] = line.charAt(c);
       }
 
       //The starting and ending positions
@@ -141,14 +132,40 @@ public class USACO{
 
       s.close();
 
+      helper(r1, c1, r2, c2, 0, 0, timer, field);
+}
     }
     catch (FileNotFoundException e){}
     return -1;
   }
 
-  private static int help(int startr, int startc, int endr, int endc, int ans, int timer, int[][] field){
-    return ans;
-  }
+
+  private static int helper(int r, int c, int r2, int c2, int ans, int count, int timer, char[][] field) {
+		if (count == timer && r == r2 && c == c2) {
+			ans ++;
+        }
+        if (count < timer) {
+		    if (field[r - 1][c - 1] == '.') {
+          //Right
+                if (c < field[0].length) {
+                    ans += helper(r, c + 1, r2, c2, 0, count + 1, timer, field);
+                }
+                //Left
+                if (c > 1) {
+                    ans += helper(r, c - 1, r2, c2, 0, count + 1, timer, field);;
+                }
+                //down
+                if (r < field.length) {
+                    ans += helper(r + 1, c, r2, c2, 0, count + 1, timer, field);;
+                }
+                //up
+                if (r > 1) {
+                    ans += helper(r - 1, c, r2, c2, 0, count + 1, timer, field);;
+                }
+            }
+        }
+		return ans;
+	}
 
   public static void main(String[] args){
     //System.out.println(bronze("makelake.1.in")); //342144
